@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="~/assets/img/RACKNE_Icon.png">
+    
+    <title>Rotaract Club of Kathmandu North East</title>
+    
+    @*<!-- Bootstrap core CSS -->
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/font")
+
+    
+    <!-- Custom styles for this template -->
+    @Styles.Render("~/Content/main")
+    <!-- Gallery Style -->
+    @Styles.Render("~/Content/fotorama")*@
+
+    @Styles.Render("~/Content/style")
+    
+    
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->    
+</head>
+<body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Home")">Rotaract Club of Kathmandu North East</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")"><a href="@Url.Action("Index","Home")">HOME</a></li>
+                    <li><a href="#">PROJECTS</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Gallery" ? "active" : "")"><a href="@Url.Action("Index","Gallery")">GALLERY</a></li>
+                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "President" ? "active" : "") dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MEMBERS</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index","President")">Presidents</a></li>
+                            <li><a href="#">Board Of Directors</a></li>
+                            <li><a href="#">Member List</a></li>
+                        </ul>
+                    </li>                                        
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+
+
+    @RenderBody()
+
+
+    <!-- FOOTER -->
+    <div id="f">
+        <div class="container">
+            <div class="row centered">                
+                <b>Meeting:</b><br />
+                Tangal Higher Secondary School<br />
+                Alternate Saturday @@ 9AM<br />
+                info@rotaractkne.org.np<br />
+                <a href="https://www.facebook.com/rotaractkne"><i class="fa fa-facebook"></i></a>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- Footer -->
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")    
+    @Scripts.Render("~/bundles/fotorama")*@    
+    @Scripts.Render("~/bundle/scripts")
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

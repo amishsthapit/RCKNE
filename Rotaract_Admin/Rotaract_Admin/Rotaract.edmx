@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="amish.sthapit_rotaractModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BOD">
+          <Key>
+            <PropertyRef Name="BODID" />
+          </Key>
+          <Property Name="BODID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Designation" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MemID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTS" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UpdateTS" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="MemID" />
+          </Key>
+          <Property Name="MemID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="DOJ" Type="datetime" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="25" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Photo" Type="varchar(max)" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreateTS" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdateTS" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="prez">
+          <Key>
+            <PropertyRef Name="PrezID" />
+          </Key>
+          <Property Name="PrezID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTS" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UpdateTS" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Venue" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTS" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UpdateTS" Type="datetime" Nullable="false" />
+          <Property Name="RotaYear" Type="varchar(max)" />
+        </EntityType>
+        <EntityContainer Name="amishsthapit_rotaractModelStoreContainer">
+          <EntitySet Name="BOD" EntityType="Self.BOD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prez" EntityType="Self.prez" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="amish.sthapit_rotaractModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BOD">
+          <Key>
+            <PropertyRef Name="BODID" />
+          </Key>
+          <Property Name="BODID" Type="Guid" Nullable="false" />
+          <Property Name="Year" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Designation" Type="Guid" Nullable="false" />
+          <Property Name="MemID" Type="Guid" Nullable="false" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="CreateTS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdateTS" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="MemID" />
+          </Key>
+          <Property Name="MemID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Unicode="false" FixedLength="false" MaxLength="50" />
+          <Property Name="DOJ" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreateTS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="UpdateTS" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="prez">
+          <Key>
+            <PropertyRef Name="PrezID" />
+          </Key>
+          <Property Name="PrezID" Type="Guid" Nullable="false" />
+          <Property Name="Year" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="CreateTS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdateTS" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Venue" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="CreateTS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdateTS" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RotaYear" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="RotaractEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BODs" EntityType="Self.BOD" />
+          <EntitySet Name="members" EntityType="Self.member" />
+          <EntitySet Name="prezs" EntityType="Self.prez" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="amishsthapit_rotaractModelStoreContainer" CdmEntityContainer="RotaractEntities">
+          <EntitySetMapping Name="BODs">
+            <EntityTypeMapping TypeName="amish.sthapit_rotaractModel.BOD">
+              <MappingFragment StoreEntitySet="BOD">
+                <ScalarProperty Name="BODID" ColumnName="BODID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="MemID" ColumnName="MemID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="amish.sthapit_rotaractModel.member">
+              <MappingFragment StoreEntitySet="member">
+                <ScalarProperty Name="MemID" ColumnName="MemID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prezs">
+            <EntityTypeMapping TypeName="amish.sthapit_rotaractModel.prez">
+              <MappingFragment StoreEntitySet="prez">
+                <ScalarProperty Name="PrezID" ColumnName="PrezID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="amish.sthapit_rotaractModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="RotaYear" ColumnName="RotaYear" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Venue" ColumnName="Venue" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
