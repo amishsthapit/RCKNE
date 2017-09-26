@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="amish.sthapit_rotaractModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="amish.sthapit_rotaractModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BOD">
           <Key>
             <PropertyRef Name="BODID" />
@@ -50,7 +50,7 @@
             <PropertyRef Name="ProjectID" />
           </Key>
           <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Venue" Type="varchar" MaxLength="250" Nullable="false" />
@@ -60,11 +60,72 @@
           <Property Name="UpdateTS" Type="datetime" Nullable="false" />
           <Property Name="RotaYear" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="tbl_credential">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_module">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Module_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_role_module">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Role_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Module_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Role" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_credential_tbl_user">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_credential" Type="Self.tbl_credential" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="tbl_credential">
+              <PropertyRef Name="Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="amishsthapit_rotaractModelStoreContainer">
           <EntitySet Name="BOD" EntityType="Self.BOD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="prez" EntityType="Self.prez" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_credential" EntityType="Self.tbl_credential" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_module" EntityType="Self.tbl_module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_role_module" EntityType="Self.tbl_role_module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_credential_tbl_user" Association="Self.FK_tbl_credential_tbl_user">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_credential" EntitySet="tbl_credential" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -115,7 +176,7 @@
             <PropertyRef Name="ProjectID" />
           </Key>
           <Property Name="ProjectID" Type="Guid" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Venue" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
@@ -130,7 +191,70 @@
           <EntitySet Name="members" EntityType="Self.member" />
           <EntitySet Name="prezs" EntityType="Self.prez" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="tbl_credential" EntityType="amish.sthapit_rotaractModel.tbl_credential" />
+          <EntitySet Name="tbl_module" EntityType="amish.sthapit_rotaractModel.tbl_module" />
+          <EntitySet Name="tbl_role" EntityType="amish.sthapit_rotaractModel.tbl_role" />
+          <EntitySet Name="tbl_role_module" EntityType="amish.sthapit_rotaractModel.tbl_role_module" />
+          <EntitySet Name="tbl_user" EntityType="amish.sthapit_rotaractModel.tbl_user" />
+          <AssociationSet Name="FK_tbl_credential_tbl_user" Association="amish.sthapit_rotaractModel.FK_tbl_credential_tbl_user">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_credential" EntitySet="tbl_credential" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tbl_credential">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_user" Relationship="amish.sthapit_rotaractModel.FK_tbl_credential_tbl_user" FromRole="tbl_credential" ToRole="tbl_user" />
+        </EntityType>
+        <EntityType Name="tbl_module">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Module_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_role_module">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Role_ID" Type="Guid" Nullable="false" />
+          <Property Name="Module_ID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_credential" Relationship="amish.sthapit_rotaractModel.FK_tbl_credential_tbl_user" FromRole="tbl_user" ToRole="tbl_credential" />
+        </EntityType>
+        <Association Name="FK_tbl_credential_tbl_user">
+          <End Type="amish.sthapit_rotaractModel.tbl_user" Role="tbl_user" Multiplicity="1" />
+          <End Type="amish.sthapit_rotaractModel.tbl_credential" Role="tbl_credential" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="tbl_credential">
+              <PropertyRef Name="Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -193,6 +317,51 @@
                 <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_credential">
+            <EntityTypeMapping TypeName="amish.sthapit_rotaractModel.tbl_credential">
+              <MappingFragment StoreEntitySet="tbl_credential">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_module">
+            <EntityTypeMapping TypeName="amish.sthapit_rotaractModel.tbl_module">
+              <MappingFragment StoreEntitySet="tbl_module">
+                <ScalarProperty Name="Module_Name" ColumnName="Module_Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_role">
+            <EntityTypeMapping TypeName="amish.sthapit_rotaractModel.tbl_role">
+              <MappingFragment StoreEntitySet="tbl_role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_role_module">
+            <EntityTypeMapping TypeName="amish.sthapit_rotaractModel.tbl_role_module">
+              <MappingFragment StoreEntitySet="tbl_role_module">
+                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_user">
+            <EntityTypeMapping TypeName="amish.sthapit_rotaractModel.tbl_user">
+              <MappingFragment StoreEntitySet="tbl_user">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

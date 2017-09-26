@@ -29,5 +29,10 @@ namespace Rotaract_Admin
         public virtual DbSet<member> members { get; set; }
         public virtual DbSet<prez> prezs { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<tbl_credential> tbl_credential { get; set; }
+        public virtual DbSet<tbl_module> tbl_module { get; set; }
+        public virtual DbSet<tbl_role> tbl_role { get; set; }
+        public virtual DbSet<tbl_role_module> tbl_role_module { get; set; }
+        public virtual DbSet<tbl_user> tbl_user { get; set; }
     }
 }
