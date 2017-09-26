@@ -17,6 +17,7 @@ namespace Rotaract_Admin
         public System.Guid ID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool Status { get; set; }
     
         public virtual tbl_user tbl_user { get; set; }
     }

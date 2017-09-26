@@ -148,6 +148,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Rotaract.edmx</DependentUpon>
     </Compile>
+    <Compile Include="tbl_credential.cs">
+      <DependentUpon>Rotaract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_module.cs">
+      <DependentUpon>Rotaract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_role.cs">
+      <DependentUpon>Rotaract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_role_module.cs">
+      <DependentUpon>Rotaract.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_user.cs">
+      <DependentUpon>Rotaract.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
