@@ -17,5 +17,10 @@ namespace Rotaract_Admin
         public System.Guid ID { get; set; }
         public System.Guid Role_ID { get; set; }
         public System.Guid Module_ID { get; set; }
+        public string Createdby { get; set; }
+        public Nullable<System.DateTime> CreateTS { get; set; }
+        public string Updatedby { get; set; }
+        public Nullable<System.DateTime> UpdateTS { get; set; }
+        public Nullable<bool> Status { get; set; }
     }
 }

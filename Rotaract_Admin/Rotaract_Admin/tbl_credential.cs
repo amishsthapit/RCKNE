@@ -18,7 +18,9 @@ namespace Rotaract_Admin
         public string Email { get; set; }
         public string Password { get; set; }
         public bool Status { get; set; }
-    
-        public virtual tbl_user tbl_user { get; set; }
+        public string Createdby { get; set; }
+        public Nullable<System.DateTime> CreateTS { get; set; }
+        public string Updatedby { get; set; }
+        public Nullable<System.DateTime> UpdateTS { get; set; }
     }
 }

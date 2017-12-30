@@ -4,17 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="46dccf25c59d4018b66036dc6c0c317e" Name="Diagram1">
-        <EntityTypeShape EntityType="amish.sthapit_rotaractModel.BOD" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="amish.sthapit_rotaractModel.member" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="amish.sthapit_rotaractModel.prez" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="amish.sthapit_rotaractModel.Project" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="amish.sthapit_rotaractModel.tbl_credential" Width="1.5" PointX="5.625" PointY="5.125" />
-        <EntityTypeShape EntityType="amish.sthapit_rotaractModel.tbl_module" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="amish.sthapit_rotaractModel.tbl_role" Width="1.5" PointX="5.375" PointY="7.75" />
-        <EntityTypeShape EntityType="amish.sthapit_rotaractModel.tbl_role_module" Width="1.5" PointX="7.375" PointY="7.75" />
-        <EntityTypeShape EntityType="amish.sthapit_rotaractModel.tbl_user" Width="1.5" PointX="3.375" PointY="4.875" />
-        <AssociationConnector Association="amish.sthapit_rotaractModel.FK_tbl_credential_tbl_user" />
+      <Diagram DiagramId="4db9059f0be74eef99d31dd203679736" Name="Diagram1">
+        <EntityTypeShape EntityType="RotaractModel.BOD" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RotaractModel.member" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RotaractModel.prez" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RotaractModel.Project" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RotaractModel.tbl_module" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RotaractModel.tbl_role" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RotaractModel.tbl_role_module" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RotaractModel.tbl_credential" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RotaractModel.tbl_user" Width="1.5" PointX="2.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

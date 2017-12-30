@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Rotaract_Admin.tbl_module>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h2>Module</h2>
+    </div>
+    <div class="title_right">
+        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right top_search">
+            <button type="button" class="btn btn-round btn-primary" onclick="@("window.location.href='" + @Url.Action("Create", "Module") + "'");">Add Module</button>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+    <tr>
+        <th>
+            Module
+        </th>        
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Module_Name)
+            </td>            
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

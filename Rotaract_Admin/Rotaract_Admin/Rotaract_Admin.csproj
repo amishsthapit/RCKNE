@@ -119,13 +119,18 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\membersController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="member.cs">
       <DependentUpon>Rotaract.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModuleModel.cs" />
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="prez.cs">
       <DependentUpon>Rotaract.tt</DependentUpon>
     </Compile>
@@ -169,13 +174,6 @@
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_LayoutPage.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <EntityDeploy Include="Rotaract.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Rotaract.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Rotaract.edmx.diagram">
-      <DependentUpon>Rotaract.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\members\Create.cshtml" />
     <Content Include="Views\members\Delete.cshtml" />
     <Content Include="Views\members\Details.cshtml" />
@@ -186,6 +184,20 @@
     <Content Include="Views\Projects\Details.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <EntityDeploy Include="Rotaract.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Rotaract.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Rotaract.edmx.diagram">
+      <DependentUpon>Rotaract.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Module\Index.cshtml" />
+    <Content Include="Views\Module\Create.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -195,7 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

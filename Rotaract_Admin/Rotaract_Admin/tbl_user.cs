@@ -14,19 +14,16 @@ namespace Rotaract_Admin
     
     public partial class tbl_user
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_user()
-        {
-            this.tbl_credential = new HashSet<tbl_credential>();
-        }
-    
         public string Email { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Role { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_credential> tbl_credential { get; set; }
+        public string Createdby { get; set; }
+        public Nullable<System.DateTime> CreateTS { get; set; }
+        public string Updatedby { get; set; }
+        public Nullable<System.DateTime> UpdateTS { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public int SN { get; set; }
     }
 }

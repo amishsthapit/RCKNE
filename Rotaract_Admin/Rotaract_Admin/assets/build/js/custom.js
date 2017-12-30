@@ -2556,7 +2556,10 @@ if (typeof NProgress != 'undefined') {
 				  keys: true
 				});
 
-				$('#datatable-responsive').DataTable();
+				$('#datatable-responsive').DataTable(
+				{
+					'order': []
+				});
 
 				$('#datatable-scroller').DataTable({
 				  ajax: "js/datatables/json/scroller-demo.json",
@@ -2572,8 +2575,8 @@ if (typeof NProgress != 'undefined') {
 
 				var $datatable = $('#datatable-checkbox');
 
-				$datatable.dataTable({
-				  'order': [[ 1, 'asc' ]],
+				$datatable.dataTable({				
+				  'order': [[ 1, 'asc' ]],				  
 				  'columnDefs': [
 					{ orderable: false, targets: [0] }
 				  ]

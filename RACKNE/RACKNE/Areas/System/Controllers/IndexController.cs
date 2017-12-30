@@ -8,7 +8,6 @@ namespace RACKNE.Areas.System.Controllers
 {
     public class IndexController : Controller
     {
-        //
         // GET: /System/Index/
 
         public ActionResult Index()
