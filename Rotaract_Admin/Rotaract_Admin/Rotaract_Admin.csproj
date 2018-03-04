@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -105,6 +106,7 @@
       <DependentUpon>Rotaract.edmx</DependentUpon>
       <LastGenOutput>Rotaract.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Rotaract.edmx.sql" />
     <Content Include="Rotaract.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Rotaract.edmx</DependentUpon>
@@ -198,6 +200,7 @@
     <Content Include="Views\Module\Index.cshtml" />
     <Content Include="Views\Module\Create.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

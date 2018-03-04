@@ -16,40 +16,41 @@
     </div>
 
 }
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(model => model.Role_ID)
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Role, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
             </div>
         </div>
-        @for (var i = 0; i < Model.lst_module.Count(); i++)        
+        @for (var i = 0; i < Model.lst_module.Count(); i++)
         {
-        <div class="form-group">
-            @*@Html.LabelFor(model => module.Module, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-2">@Model.lst_module[i].Module</label>
-            @Html.HiddenFor(model => model.lst_module[i].id)
-            @*@Html.DisplayFor(model => model.lst_module[i].Module)*@
-            <div class="col-md-10">
-                @Html.CheckBoxFor(model => Model.lst_module[i].Value, new { @Class = "form-control icheckbox_flat-green"})
-                @*@Html.CheckBox(module.Module , new { @Class = "form-control icheckbox_flat-green", @checked = module.Value } )*@
-                @*@Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })*@
-            </div>
+            <div class="form-group">
+                @*@Html.LabelFor(model => module.Module, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-2">@Model.lst_module[i].Module</label>
+                @Html.HiddenFor(model => model.lst_module[i].id)
+                @*@Html.DisplayFor(model => model.lst_module[i].Module)*@
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => Model.lst_module[i].Value, new { @Class = "form-control icheckbox_flat-green" })
+                    @*@Html.CheckBox(module.Module , new { @Class = "form-control icheckbox_flat-green", @checked = module.Value } )*@
+                    @*@Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })*@
+                </div>
 
-        </div>
+            </div>
         }
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>

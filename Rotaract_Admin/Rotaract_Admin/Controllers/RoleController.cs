@@ -15,21 +15,53 @@ namespace Rotaract_Admin.Controllers
         tbl_role o_role = new tbl_role();
         List<tbl_role> lst_role = new List<tbl_role>();
 
-        private RoleModel RolePage()
+
+        /*Returns the modules associated with the role.
+        Parameters:
+        id: Role ID
+        */
+        private RoleModel RolePage(string id)
         {
             RoleModel role = new RoleModel();
-            List<ModuleModel> module = new List<ModuleModel>();
-            List<string> lst_module = new List<string>();
-            lst_module = obj.tbl_module.Select(x => x.Module_Name).ToList();
-            foreach (string mod in lst_module)
+            List<ModuleModel> module = new List<ModuleModel>();            
+            List<string> rolemodule = new List<string>();
+            var lst_module = obj.tbl_module.Select(x => new { x.Module_Name, x.ID }).ToList();   
+            if(id != null)
+            {
+                role.Role_ID = Guid.Parse(id);
+                rolemodule = obj.tbl_module.Where(x => obj.tbl_role_module.Where(y => y.Role_ID == role.Role_ID && y.Status == true).Select(y => y.Module_ID).ToList().Contains(x.ID)).Select(x => x.Module_Name).ToList();
+                role.Role = obj.tbl_role.Where(y => y.ID == role.Role_ID).Select(x => x.Name).FirstOrDefault();
+                
+            }
+            
+            foreach (var mod in lst_module)
             {
                 ModuleModel aa = new ModuleModel();
-                aa.Module = mod;
+                aa.id = mod.ID;
+                aa.Module = mod.Module_Name;
+                if(rolemodule.Contains(mod.Module_Name))
+                {
+                    aa.Value = true;
+                }
+                else
+                {
+                    aa.Value = false;
+                }
                 module.Add(aa);
             }
             role.lst_module = module;
             return (role);
         }
+
+
+        private bool RoleCheck(string role)
+        {
+            if (obj.tbl_role.Where(x => x.Name == role).Count() != 0)
+                return true;
+            else
+                return false;
+        }
+
         // GET: Role
         public ActionResult Index()
         {
@@ -45,26 +77,25 @@ namespace Rotaract_Admin.Controllers
         // GET: Role/Create
         public ActionResult Create()
         {
-            return View(RolePage());
+            return View(RolePage(null));
         }
 
         // POST: Role/Create
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(RoleModel roleModel)
         {
-            try
+            if (RoleCheck(roleModel.Role))
             {
-                //var temp1 = collection[collection.AllKeys[2]];
-                //var temp2 = collection[collection.AllKeys[3]];
-                //var temp = collection[collection.AllKeys.Where(k => k.Contains("Projects")).FirstOrDefault()];
-
-
-                var keys = collection.AllKeys.ToList();
-                var module = obj.tbl_module.ToList();
+                ViewData["error"] = "The Role already exists.";
+                return View(RolePage(null));
+            }
+            try
+            {                
                 tbl_role o_role = new tbl_role();
                 o_role.ID = Guid.NewGuid();
-                o_role.Name = collection[collection.AllKeys[1]];
+                o_role.Name = roleModel.Role;                
+
                 o_role.Status = true;
                 o_role.Createdby = "Admin";
                 o_role.Updatedby = "Admin";
@@ -72,19 +103,15 @@ namespace Rotaract_Admin.Controllers
                 o_role.UpdateTS = DateTime.UtcNow;
                 obj.tbl_role.Add(o_role);
 
-                foreach (var key in keys)
+                foreach (var module in roleModel.lst_module)
                 {
-                    if( module.Select(x=>x.Module_Name).Contains(key.ToString()))
-                    {
+                    if(module.Value)
+                    {                    
                         tbl_role_module role_module = new tbl_role_module();
                         role_module.ID = Guid.NewGuid();
                         role_module.Role_ID = o_role.ID;
-                        role_module.Module_ID = module.Where(y => y.Module_Name == key.ToString()).Select(x=> x.ID).FirstOrDefault();
-                        role_module.Status = false;
-                        if (collection[collection.AllKeys.Where(k => k.Contains(key)).FirstOrDefault()] != "false")
-                        {
-                            role_module.Status = true;
-                        }                        
+                        role_module.Module_ID = module.id;
+                        role_module.Status = module.Value;                       
                         role_module.Createdby = "Admin";
                         role_module.Updatedby = "Admin";
                         role_module.CreateTS = DateTime.UtcNow;
@@ -93,9 +120,7 @@ namespace Rotaract_Admin.Controllers
                     }
                 }
                 obj.SaveChanges();
-                //List<ModuleModel> test1 = collection[collection.AllKeys[2]];
-                // TODO: Add insert logic here
-
+                ViewData["success"] = "The Role is created successfully";
                 return RedirectToAction("Index");
             }
             catch (DbUpdateException ex)
@@ -104,7 +129,7 @@ namespace Rotaract_Admin.Controllers
                 if (innerException != null && (innerException.Number == 2627 || innerException.Number == 2601))
                 {
                     ViewData["error"] = "Role already exists!";
-                    return View(RolePage());
+                    return View(RolePage(null));
                 }
                 else
                 {
@@ -114,29 +139,90 @@ namespace Rotaract_Admin.Controllers
             catch (Exception ex)
             {
                 ViewData["error"] = "An error occured. Please try again!";
-                return View(RolePage());
+                return View(RolePage(null));
             }
+            
         }
 
         // GET: Role/Edit/5
         public ActionResult Edit(string id)
-        {
-            return View();
+        {             
+            return View(RolePage(id));
         }
 
         // POST: Role/Edit/5
+        [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(RoleModel roleModel)
         {
+            tbl_role o_role = obj.tbl_role.Where(x => x.ID == roleModel.Role_ID).FirstOrDefault();
+            if (RoleCheck(roleModel.Role) == true && o_role.Name != roleModel.Role)
+            {
+                ViewData["error"] = "The Role already exists.";
+                return View(RolePage(null));
+            }
             try
             {
-                // TODO: Add update logic here
+                                
+                o_role.Name = roleModel.Role;
+                o_role.Status = true;                
+                o_role.Updatedby = "Admin";                
+                o_role.UpdateTS = DateTime.UtcNow;
+                //obj.tbl_role.Add(o_role);
+                obj.SaveChanges();
+
+                foreach (var module in roleModel.lst_module)
+                {
+                    tbl_role_module role_module = obj.tbl_role_module.Where(x => x.Role_ID == roleModel.Role_ID && x.Module_ID == module.id).FirstOrDefault();                        
+                    if(role_module == null && module.Value == true)
+                    {
+                        tbl_role_module new_role = new tbl_role_module();
+                        new_role.ID = Guid.NewGuid();
+                        new_role.Role_ID = o_role.ID;
+                        new_role.Module_ID = module.id;
+                        new_role.Status = module.Value;
+                        new_role.Createdby = "Admin";
+                        new_role.CreateTS = DateTime.UtcNow;
+                        new_role.Updatedby = "Admin";
+                        new_role.UpdateTS = DateTime.UtcNow;
+                        obj.tbl_role_module.Add(new_role);
+                    }
+                    else if (role_module == null)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        if(role_module.Status != module.Value)
+                        {
+                            role_module.Status = module.Value;
+                            role_module.Updatedby = "Admin";
+                            role_module.UpdateTS = DateTime.UtcNow;
+                        }                                                        
+                    }
+                    obj.SaveChanges();
+                }
+                
 
                 return RedirectToAction("Index");
             }
-            catch
+            //catch (DbUpdateException ex)
+            //{
+            //    SqlException innerException = ex.InnerException.InnerException as SqlException;
+            //    if (innerException != null && (innerException.Number == 2627 || innerException.Number == 2601))
+            //    {
+            //        ViewData["error"] = "Role already exists!";
+            //        return View(RolePage(null));
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
+            catch (Exception ex)
             {
-                return View();
+                ViewData["error"] = "An error occured. Please try again!";
+                return View(RolePage(null));
             }
         }
 

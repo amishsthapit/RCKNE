@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RotaractModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BOD">
+        <EntityType Name="BODs">
           <Key>
             <PropertyRef Name="BODID" />
           </Key>
@@ -18,7 +18,7 @@
           <Property Name="UpdatedBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UpdateTS" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="member">
+        <EntityType Name="members">
           <Key>
             <PropertyRef Name="MemID" />
           </Key>
@@ -34,7 +34,7 @@
           <Property Name="UpdatedBy" Type="uniqueidentifier" />
           <Property Name="UpdateTS" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="prez">
+        <EntityType Name="prezs">
           <Key>
             <PropertyRef Name="PrezID" />
           </Key>
@@ -45,7 +45,7 @@
           <Property Name="UpdatedBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UpdateTS" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Project">
+        <EntityType Name="Projects">
           <Key>
             <PropertyRef Name="ProjectID" />
           </Key>
@@ -126,10 +126,10 @@
           <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityContainer Name="RotaractModelStoreContainer">
-          <EntitySet Name="BOD" EntityType="Self.BOD" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="prez" EntityType="Self.prez" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BODs" EntityType="Self.BODs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="members" EntityType="Self.members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prezs" EntityType="Self.prezs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_credential" EntityType="Self.tbl_credential" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_module" EntityType="Self.tbl_module" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="dbo" store:Type="Tables" />
@@ -275,140 +275,139 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RotaractModelStoreContainer" CdmEntityContainer="RotaractEntities">
-          <EntitySetMapping Name="BODs">
-            <EntityTypeMapping TypeName="RotaractModel.BOD">
-              <MappingFragment StoreEntitySet="BOD">
-                <ScalarProperty Name="BODID" ColumnName="BODID" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Designation" ColumnName="Designation" />
-                <ScalarProperty Name="MemID" ColumnName="MemID" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="members">
-            <EntityTypeMapping TypeName="RotaractModel.member">
-              <MappingFragment StoreEntitySet="member">
-                <ScalarProperty Name="MemID" ColumnName="MemID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="prezs">
-            <EntityTypeMapping TypeName="RotaractModel.prez">
-              <MappingFragment StoreEntitySet="prez">
-                <ScalarProperty Name="PrezID" ColumnName="PrezID" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="RotaractModel.Project">
-              <MappingFragment StoreEntitySet="Project">
-                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Venue" ColumnName="Venue" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-                <ScalarProperty Name="RotaYear" ColumnName="RotaYear" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_module">
-            <EntityTypeMapping TypeName="RotaractModel.tbl_module">
-              <MappingFragment StoreEntitySet="tbl_module">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Module_Name" ColumnName="Module_Name" />
-                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_role">
-            <EntityTypeMapping TypeName="RotaractModel.tbl_role">
-              <MappingFragment StoreEntitySet="tbl_role">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_role_module">
-            <EntityTypeMapping TypeName="RotaractModel.tbl_role_module">
-              <MappingFragment StoreEntitySet="tbl_role_module">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
-                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
-                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_credential">
-            <EntityTypeMapping TypeName="RotaractModel.tbl_credential">
-              <MappingFragment StoreEntitySet="tbl_credential">
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_user">
-            <EntityTypeMapping TypeName="RotaractModel.tbl_user">
-              <MappingFragment StoreEntitySet="tbl_user">
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-                <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RotaractModelStoreContainer" CdmEntityContainer="RotaractEntities">
+    <EntitySetMapping Name="BODs">
+      <EntityTypeMapping TypeName="IsTypeOf(RotaractModel.BOD)">
+        <MappingFragment StoreEntitySet="BODs">
+          <ScalarProperty Name="BODID" ColumnName="BODID" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="MemID" ColumnName="MemID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="members">
+      <EntityTypeMapping TypeName="IsTypeOf(RotaractModel.member)">
+        <MappingFragment StoreEntitySet="members">
+          <ScalarProperty Name="MemID" ColumnName="MemID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prezs">
+      <EntityTypeMapping TypeName="IsTypeOf(RotaractModel.prez)">
+        <MappingFragment StoreEntitySet="prezs">
+          <ScalarProperty Name="PrezID" ColumnName="PrezID" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="IsTypeOf(RotaractModel.Project)">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Venue" ColumnName="Venue" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+          <ScalarProperty Name="RotaYear" ColumnName="RotaYear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_module">
+      <EntityTypeMapping TypeName="IsTypeOf(RotaractModel.tbl_module)">
+        <MappingFragment StoreEntitySet="tbl_module">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Module_Name" ColumnName="Module_Name" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_role">
+      <EntityTypeMapping TypeName="IsTypeOf(RotaractModel.tbl_role)">
+        <MappingFragment StoreEntitySet="tbl_role">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_role_module">
+      <EntityTypeMapping TypeName="IsTypeOf(RotaractModel.tbl_role_module)">
+        <MappingFragment StoreEntitySet="tbl_role_module">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+          <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_credential">
+      <EntityTypeMapping TypeName="IsTypeOf(RotaractModel.tbl_credential)">
+        <MappingFragment StoreEntitySet="tbl_credential">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_user">
+      <EntityTypeMapping TypeName="IsTypeOf(RotaractModel.tbl_user)">
+        <MappingFragment StoreEntitySet="tbl_user">
+          <ScalarProperty Name="SN" ColumnName="SN" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -422,7 +421,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

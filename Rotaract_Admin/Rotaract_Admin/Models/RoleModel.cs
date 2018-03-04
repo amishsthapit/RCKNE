@@ -8,7 +8,8 @@ using System.ComponentModel.DataAnnotations;
 namespace Rotaract_Admin.Models
 {
     public class RoleModel
-    {        
+    {
+        public Guid Role_ID { get; set; }
         public string Role { get; set; }
         public List<ModuleModel> lst_module { get; set; }
     }
