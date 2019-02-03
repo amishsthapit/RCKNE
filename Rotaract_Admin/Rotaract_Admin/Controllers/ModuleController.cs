@@ -71,24 +71,47 @@ namespace Rotaract_Admin.Controllers
         }
 
         // GET: Module/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            Guid moduleid = Guid.Parse(id);
+            return View(obj.tbl_module.Where(x => x.ID == moduleid).FirstOrDefault());
         }
 
         // POST: Module/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(tbl_module modulemodel)
         {
             try
             {
-                // TODO: Add update logic here
+                o_module = obj.tbl_module.Where(x => x.ID == modulemodel.ID).FirstOrDefault();
+
+                o_module.Module_Name = modulemodel.Module_Name;                
+                o_module.Updatedby = "Admin";                
+                o_module.UpdateTS = DateTime.UtcNow;
+                
+
+                
+                obj.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (DbUpdateException ex)
             {
-                return View();
+                SqlException innerException = ex.InnerException.InnerException as SqlException;
+                if (innerException != null && (innerException.Number == 2627 || innerException.Number == 2601))
+                {
+                    ViewData["error"] = "Module already exists!";
+                    return View(o_module);
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["error"] = "An error occured. Please try again!";
+                return View(o_module);
             }
         }
 

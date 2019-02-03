@@ -167,8 +167,7 @@ namespace Rotaract_Admin.Controllers
                 o_role.Name = roleModel.Role;
                 o_role.Status = true;                
                 o_role.Updatedby = "Admin";                
-                o_role.UpdateTS = DateTime.UtcNow;
-                //obj.tbl_role.Add(o_role);
+                o_role.UpdateTS = DateTime.UtcNow;                
                 obj.SaveChanges();
 
                 foreach (var module in roleModel.lst_module)
